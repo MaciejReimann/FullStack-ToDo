@@ -1,0 +1,12 @@
+{
+  "name": "fullstack-todo",
+  "version": "1.0.0",
+  "description": "FullStack ToTo App",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon --exec babel-node todo_api/index .js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maciej Reimann",
+  "license": "MIT"
+}
