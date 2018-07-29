@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TodoItem from './TodoItem';
-const APIURL = '/api/todos';
+import TodoForm from './TodoForm';
+const APIURL = '/api/todos/';
 
 
 
@@ -10,6 +11,7 @@ class TodoList extends Component {
     this.state = {
       todos: []
     }
+    this.addTodo = this.addTodo.bind(this)
   };
 
   componentWillMount() {
@@ -35,16 +37,48 @@ class TodoList extends Component {
     .then(todos => this.setState({todos}))
   }
 
+  addTodo(value) {
+    fetch(APIURL, {
+      method: 'post',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({name: value})
+    })
+    .then(response => {
+      if(!response.ok) {
+        if(response.status >=400 && response.status < 500) {
+          return response.json().then(data => {
+            let err = {errorMessage: data.message};
+            throw err;
+          })
+        } else {
+          let err = {errorMessage: 'PLease try again later; server is not responding'}
+          throw err;
+        }
+      }
+      return response.json();
+    })
+    .then(newTodo => {
+      this.setState({todos: [...this.state.todos, newTodo]})
+    })
+  };
+
+  deleteTodo() {
+    const deleteURL = APIURL + id;
+  };
+
   render() {
-    const todos = this.state.todos.map(todoItem =>
+    const todos = this.state.todos.map((t) => (
       <TodoItem
-        key = {todoItem._id}
-        {...todoItem}
+        key = {t._id}
+        {...t}
       />
-    );
+    ));
     return (
       <div>
         <h1>Todo List!</h1>
+        <TodoForm addTodo = {this.addTodo}/>
         <ul>
           {todos}
         </ul>
