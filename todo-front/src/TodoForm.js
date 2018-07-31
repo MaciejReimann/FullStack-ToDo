@@ -19,7 +19,6 @@ class TodoForm extends Component {
     this.props.addTodo(this.state.inputValue)
   }
 
-
   render() {
     return (
       <div>
@@ -37,25 +36,6 @@ class TodoForm extends Component {
     )
   };
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
