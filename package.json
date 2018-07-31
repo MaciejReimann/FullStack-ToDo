@@ -4,9 +4,13 @@
   "description": "FullStack ToTo App",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon --exec babel-node todo_api/index .js",
+    "start": "nodemon --exec babel-node todo_api/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Maciej Reimann",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
 }
