@@ -64,15 +64,71 @@ class TodoList extends Component {
     })
   };
 
-  deleteTodo() {
+  deleteTodo(id) {
     const deleteURL = APIURL + id;
+    fetch(deleteURL, {
+      method: 'delete'
+    })
+    .then(response => {
+      if(!response.ok) {
+        if(response.status >=400 && response.status < 500) {
+          return response.json().then(data => {
+            let err = {errorMessage: data.message};
+            throw err;
+          })
+        } else {
+          let err = {errorMessage: 'PLease try again later; server is not responding'}
+          throw err;
+        }
+      }
+      return response.json();
+    })
+    .then(() => {
+      const todos = this.state.todos.filter( todo => todo._id !== id )
+      this.setState({todos: todos})
+    })
   };
+
+  toggleTodo(todo) {
+    const updateURL = APIURL + todo._id;
+    fetch(updateURL, {
+      method: 'put',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({ completed: !todo.completed })
+    })
+    .then(response => {
+      if(!response.ok) {
+        if(response.status >=400 && response.status < 500) {
+          return response.json().then(data => {
+            let err = {errorMessage: data.message};
+            throw err;
+          })
+        } else {
+          let err = {errorMessage: 'PLease try again later; server is not responding'}
+          throw err;
+        }
+      }
+      return response.json();
+    })
+    .then(updatedTodo => {
+      const todos = this.state.todos.map( t =>
+        (t._id === updatedTodo._id)
+        ? {...t, completed: !t.completed}
+        : t
+      )
+      this.setState({todos: todos})
+    })
+  }
 
   render() {
     const todos = this.state.todos.map((t) => (
       <TodoItem
         key = {t._id}
         {...t}
+        onDelete = {this.deleteTodo.bind(this, t._id)}
+        onToggle = {this.toggleTodo.bind(this, t)}
       />
     ));
     return (
