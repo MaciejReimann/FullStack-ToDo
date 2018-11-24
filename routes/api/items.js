@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 });
 
 // @route   POST api/items
-// @desc    Create a post
+// @desc    Create a item
 // @access  Public
 router.post('/', (req, res) => {
     const newItem = new Item({
@@ -30,6 +30,15 @@ router.post('/', (req, res) => {
 // {"name: "Milk}
 // expect a 200 response along with the new item sent back
 
+// @route   DELETE api/items/:id
+// @desc    Create a item
+// @access  Public
+router.delete('/:id', (req, res) => {
+    Item.findById(req.params.id)
+        .then(item => item.remove()
+            .then(() => res.json({ success: true })))
+        .catch(err => res.status(404).json({ success: false }));
+});
 
 module.exports = router;
 
