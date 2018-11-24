@@ -1,12 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// Take requests and data from the body;
+// Take requests and data from the body
 const bodyParser = require('body-parser');
 
-// Initialize express into app;
+const items = require('./routes/api/items');
+
+// Initialize express into app
 const app = express();
 
-// Bodyparser Middleware;
+// Bodyparser Middleware
 app.use(bodyParser.json());
 
 // DB Config;
@@ -17,6 +19,9 @@ mongoose
     .connect(db)
         .then(() => console.log('mongoD connected'))
         .catch(err => console.log(err));
+
+// Use Routes
+app.use('/api/items', items);
 
 const port = process.env.PORT || 5000;
 
