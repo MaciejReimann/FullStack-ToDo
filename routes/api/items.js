@@ -13,6 +13,23 @@ router.get('/', (req, res) => {
         .then(items => res.json(items))
 });
 
+// @route   POST api/items
+// @desc    Create a post
+// @access  Public
+router.post('/', (req, res) => {
+    const newItem = new Item({
+        name: req.body.name // body-parser allows to do this
+    });
+
+    // Save newItem to database
+    newItem.save().then(item => res.json(item));
+});
+// To test it with POSTMAN:
+// 1.cange to POST, 2.add Header with Key: Content-Type and Value: application/json
+// 3.go to Body -> select 'raw' and 'JSON(application/json) 4.put in JSON file: 
+// {"name: "Milk}
+// expect a 200 response along with the new item sent back
+
 
 module.exports = router;
 
