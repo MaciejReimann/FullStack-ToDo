@@ -1,24 +1,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// Take requests and data from the body
-const bodyParser = require('body-parser');
-const path = require('path')
+const bodyParser = require('body-parser'); // take requests and data from the body
+const path = require('path'); // a node module - doesn't require npm i
 
+// Import router
 const items = require('./routes/api/items');
 
-// Initialize express into app
+// Initialize express in app variable
 const app = express();
 
-// Bodyparser Middleware
+// Apply bodyparser Middleware
 app.use(bodyParser.json());
 
 // DB Config;
 const db = require('./config/keys').mongoURI;
 
-// Connect to Mongo
+// Connect to MongoDB
 mongoose
     .connect(db)
-        .then(() => console.log('mongoD connected'))
+        .then(() => console.log('MongoDB Connected!'))
         .catch(err => console.log(err));
 
 // Use Routes
@@ -30,8 +30,8 @@ if(process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    })
-}
+    });
+};
 
 const port = process.env.PORT || 5000;
 
