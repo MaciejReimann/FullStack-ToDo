@@ -1,33 +1,41 @@
 {
-  "name": "FullstackCart",
+  "name": "heroku-cra-node",
   "version": "1.0.0",
-  "description": "FullStack Shopping Cart",
-  "main": "server.js",
-  "scripts": {
-    "client-install": "cd client && npm install",
-    "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "cd client && npm start",
-    "dev": "set NODE_ENV=development && concurrently \"npm run server\" \"npm run client \"",
-    "heroku-postbuild": "cd client && NPM_CONFIG_PRODUCTION=false npm install && npm run build"
+  "description": "How to use create-react-app with a custom Node API on Heroku",
+  "engines": {
+    "node": "8.9.x"
   },
-  "author": "Maciej Reimann",
-  "license": "MIT",
-  "devDependencies": {
-    "nodemon": "^1.18.6"
+  "scripts": {
+    "locally": "npm install && cd client && npm install && cd.. && npm run dev",
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client \" ",
+    "publish": "git push heroku master && heroku open",
+    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.3.13",
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MaciejReimann/FullstackTodo.git"
+    "url": "https://github.com/MaciejReimann/MERNBoilerplate"
   },
-  "bugs": {
-    "url": "https://github.com/MaciejReimann/FullstackTodo/issues"
-  },
-  "homepage": "https://github.com/MaciejReimann/FullstackTodo#readme",
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "concurrently": "^4.1.0",
-    "express": "^4.16.4",
-    "mongoose": "^5.3.13"
+  "keywords": [
+    "node",
+    "heroku",
+    "create-react-app",
+    "react"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.18.6"
   }
 }

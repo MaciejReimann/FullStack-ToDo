@@ -13,15 +13,16 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
+      // <Provider store={store}>
         <div className="App">
-          <AppNavbar />
+          Hello
+          {/* <AppNavbar />
           <Container>
             <ItemModal />
             <ShoppingList />
-          </Container>
+          </Container> */}
         </div>
-      </Provider>     
+      // </Provider>     
     );
   }
 }
