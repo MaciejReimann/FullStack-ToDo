@@ -47,7 +47,7 @@ class ItemModal extends Component {
         return (
             <div>
                 <Button
-                    color="dark"
+                    color="success"
                     style={{marginBottom: '2rem'}}
                     onClick = {this.toggle}
                 >
