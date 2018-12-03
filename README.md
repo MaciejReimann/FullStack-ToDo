@@ -3,7 +3,7 @@ A simple Mongo + Express + React + Redux shopping cart app.
 ___
 
 ## Brief:
-User can add and delete items;
+User can add items to cart and delete them;
 
 ## Goals:
 &nbsp;&nbsp; 1. To practice building MERN app; \
@@ -25,7 +25,8 @@ User can add and delete items;
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=PBTYxXADG_k
 " target="_blank"><img src="http://img.youtube.com/vi/PBTYxXADG_k/0.jpg" 
 alt="Learn The MERN Stack" width="240" height="180" border="10" /></a> <br>
-But follow Mars Hall deployment instructions instead: https://github.com/mars/heroku-cra-node
+<br>
+To deploy, follow Mars Hall instructions: https://github.com/mars/heroku-cra-node
 
 
 
